@@ -1,8 +1,250 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Mastodon Content Mover</title>
-  </head>
-  <body>
-  <h3>Hello World!</h3>
-  </body>
+<head>
+<style>
+
+body {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  line-height: 1.6;
+  font-family:  Meiryo, Segoe UI, sans-serif;
+  font-size: 97%;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  padding-top: 1.2em;
+}
+
+h3 {
+  padding-top: 1.2em;
+}
+
+.page {
+  width: 90%;
+  position: relative;
+  left: 5%;
+  padding-top: 3em;
+}
+
+table, th, td {
+  border-width: 0.5px;
+  border-style: solid;
+}
+
+td {
+  padding: 0.4em;
+}
+
+th {
+  padding: 0.4em;
+}
+
+td.mid {
+  text-align: center;
+}
+
+
+@media (min-device-width: 480px) {
+  /* For desktop: */
+
+  .page {
+    width: 80%;
+    left: 10%;
+  }
+
+}
+
+
+</style>
+<title>Mastodon Content Mover</title> 
+</head>
+<body>
+<div class="page">
+<h1>Mastodon Content Mover</h1>
+
+
+<ul>
+   <li><a href="#whatisMCM">What is Mastodon Content Mover?</a></li>
+   <li><a href="#howToUse">How do I use it?</a></li>
+   <li><a href="#parameters">Parameter guide</a></li>
+   <li><a href="#security">Security</a></li>
+<!--   <li><a href="#commonProblems">Common problems</a></li>  -->
+<!--   <li><a href="#bugReports">How to report bugs (fix link here!!)</a></li>  -->
+   <li><a href="#admins">Information for instance administrators</a></li></li>
+<!--   <li><a href="#advanced">Advanced</a></li>  -->
+<!--   <li><a href="#acknowledgements">Acknowledgements</a></li>  -->
+   <li><a href="#more">Further information</a></li></li>
+</ul>
+<hr />
+<h2>Important</h2>
+<span style="color: red; font-weight: bold">Mastodon Content Mover is currently in development</span>. The current, early-stage development testing version is available <u>for development testing purposes only</u>. It is likely to fail in ungainly and/or unexpected ways, produce ugly error messages, or maybe just plain not work at all. Please be aware that <u>you use it at your own risk</u>. The authors of this tool accept no responsibility for any data undesirably lost or created through its use, or any ill effects due to its misuse.
+<br /><br />
+
+<hr />
+<h2>What's new?</h2>
+Development release 0.01.00: Full source code and the runnable .jar file are now available on the <a href="https://github.com/MastodonContentMover/repo">Github repository</a>!
+<br /><br />
+<i>Last updated Sunday May 21, 2023</i>
+<hr />
+
+<h2><a name="whatisMCM">What is Mastodon Content Mover?</a></h2>
+Mastodon Content Mover is a command-line tool that downloads your posts from one Mastodon instance, saving them as a set of files on your computer, and then re-posts them on any other Mastodon instance.<br /><br />
+Its purpose is to allow Mastodon users to move content they value when migrating from one instance to another, which is not currently possible within Mastodon itself.
+<h3>What can it do?</h3>
+<h4>It can:</h4>
+<ul>
+  <li>save the text of your posts and any attached media from a source Mastodon instance to your computer</li>
+  <li>re-post new copies of those posts, including the text and any attached media, from your computer to another Mastodon instance</li>
+  <li>save "alt text" descriptions of images and video when saving media, and reapply them when media is re-posted</li>
+  <li>save image focal points, and reapply them when images are re-posted</li>
+  <li>identify "self-reply" threads (threads that include two or more of your own posts) and rethread them when the posts are re-posted</li>
+  <li>identify "@" and "#" symbols that mark users' tags and hashtags within posts, and replace these symbols with similar-looking characters when re-posting so that hashtags and users are not inundated during re-posting (it is currently possible to disable this for hashtags)</li>
+  <li>save video thumbnails</li>
+  <li>identify posts that are bookmarked and pinned when saving, and then re-bookmark and re-pin them when they are re-posted</li>
+  <li>selectively save or re-post only posts that are bookmarked</li>
+  <li>selectively re-post only posts that were originally created before, after or during a specified time period</li>
+</ul>
+
+<h4>It cannot (and will never):</h4>
+<ul>
+  <li>set the posting date/time on re-posted content to the original posting date/time of the source post on the original Mastodon instance</li>
+  <li>preserve or recreate threaded conversations linking your posts to those of others — this would require a feature called <b>identity portability</b> within Mastodon itself, and is beyond the scope of this tool</li>
+  <li>save and restore account preferences</li>
+</ul>
+
+<h4>It cannot <u><i>yet</i></u>:</h4>
+<ul>
+   <li>repost statuses from a Mastodon instance with a longer character limit for posts to an instance with a shorter character limit for posts</li>
+   <li>add to an existing archive of posts on your computer (allowing you to resume saving posts if the network connection fails during that process, or to incrementally backup posts on a regular basis)</li>
+   <li>save custom emojis</li>
+   <li>re-apply downloaded video thumbnails when videos are re-posted</li>
+   <li>use a Mastodon archive file as a source for post data</li>
+   <li>save and restore users' notes written on the profiles of other users</li>
+   <li>save and restore lists</li>
+   <li>quite a lot of other things (a to-do list in priority order will be linked here soon)</li>
+</ul>
+
+<h2><a name="howToUse">How do I use it?</a></h2>
+Mastodon Content Mover is built using Java, which means the same executable file can be run on any operating system (Windows, Mac OS, Linux etc.)<br /><br />
+Because of this, there is no installation process for the tool itself — you simply download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">one .jar file</a>. Java (or the "Java Runtime Environment") also needs to be installed on your computer to run that .jar file. Java is free to download and use, and can be downloaded from <a href="https://www.java.com/en/">the official Java website</a>.
+<br /><br />
+To use the tool to move your Mastodon posts between instances, you need to:<br />
+<ol>
+   <li>If necessary, download Java from the <a href="https://www.java.com/en/">the official Java website</a> and install it</li>
+   <li>Download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a>, the .jar file for Mastodon Content Mover</li>
+   <li>Run mcm.jar from the command line on your computer to save your posts from your source Mastodon instance</li>
+   <li>Run mcm.jar again from the command line to re-post your posts to your (new) destination Mastodon instance</li>
+</ol>
+<br /><br />
+<b>Important</b>: This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) read and write posts to your Mastodon account! If you are not the only person with access to your computer, or if you are using a shared computer, please check the steps in the <a href="#security">security</a> section to ensure credentials are deleted after use.
+<h3>Step-by-step:</h3>
+<ol>
+   <li>Open a command prompt on your computer and enter "<code>java -version</code>".
+      <ul>
+         <li>If Java is installed, this will display the currently installed version.</li>
+         <li>If no installed version is displayed (or if the version number is less than 8.0), close the window then download and install Java from <a href="https://www.java.com/en/">the official website</a>. Then open a fresh command prompt and check again that "<code>java -version</code>" displays the currently installed version of Java.</li>
+      </ul>
+   </li>
+   <li>Create a new directory for Mastodon Content Mover, then download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a> from the <a href="https://github.com/MastodonContentMover/repo/">project Github repository</a> and put it in that directory.</li>
+   <li>Using the command prompt, move to your Mastodon Content Mover directory.</li>
+   <li>Run the following command, substituting the bold parameters: the domain name for your source Mastodon instance (the one you wish to save from), your username on the source instance, and the name you would like to use for the archive folder on your computer where post data will be saved.<br /> 
+<code>java -jar mcm.jar save -instance:<b>myOldInstance.social</b> -username:<b>myOldUsername</b> -archiveName:<b>myPosts</b></code><br /> </li>
+   <li>Follow the prompts as needed to grant read and write permissions to Mastodon Content Mover using OAuth, then wait for your posts to be saved.</li>
+   <li>At this point, you may wish to log out of your source Mastodon instance in your browser, and log into your new Mastodon instance (the one you wish to post to)</li>
+   <li>To re-post your Mastodon posts to a new instance, run the following command, substituting the bold parameters: the domain name for your destination Mastodon instance, your username on the new instance, and the name you used in the previous step to save your post data.<br /> 
+<code>java -jar mcm.jar post -instance:<b>myNewInstance.world</b> -username:<b>myNewUsername</b> -archiveName:<b>myPosts</b></code><br /></li>
+   <li>Follow the prompts as needed to grant read and write permissions to Mastodon Content Mover using OAuth, then wait for your posts to be re-posted.</li>
+</ol>
+<h2><a name="parameters">Parameter guide</a></h2>
+The main, required command-line options are as follows:<br /><br />
+<table>
+   <tr>
+      <td>either <code><b>save</b></code> or <code><b>post</b></code></td>
+      <td>according to whether you wish to <code>save</code> your existing posts from a Mastodon instance to your computer, or re-<code>post</code> them from a Mastodon Content Mover archive on your computer to a Mastodon instance</td>
+   </tr>
+   <tr>
+      <td><code><b>-instance</b><code></td>
+      <td>the hostname or address of the Mastodon instance</td>
+   </tr>
+   <tr>
+      <td><code><b>-username</b><code></td>
+      <td>your username or account name on a specified Mastodon instance</td>
+   </tr>
+   <tr>
+      <td><code><b>-archiveName</b><code></td>
+      <td>the name of the archive you would like to save to (create) or post from — this will be used to create or read from a folder within the <code>data</code> directory that will be created in your Mastodon Content Mover directory the first time the tool is run</td>
+   </tr>
+</table>
+
+<br /><br />
+
+Additional, optional command-line options that are currently implemented are as follows:<br /><br />
+<table>
+   <tr>
+      <td><code><b>-bookmarkedOnly</b><code></td>
+      <td><code>no</code> by default, <code>yes</code> to save or post only posts that were bookmarked by the specified user account</td>
+   </tr>
+   <tr>
+      <td><code><b>-preserveHashtags</b><code></td>
+      <td><code>no</code> by default, <code>yes</code> to retain hashtags when reposting statuses, which will result in the new, reposted posts being displayed under that hashtag to anyone who follows it or searches for it</td>
+   </tr>
+   <tr>
+      <td><code><b>-extraThrottle</b><code></td>
+      <td>the number of additional seconds to wait between each API call (interaction with a given Mastodon instance)</td>
+   </tr>
+   <tr>
+      <td><code><b>-customPort</b><code></td>
+      <td><code>8081</code> by default, or a custom TCP port to use briefly on the local computer when you authorize the tool using OAuth in your browser</td>
+   </tr>
+   <tr>
+      <td><code><b>-showdebug</b><code></td>
+      <td><code>no</code> by default, <code>yes</code> to display additional debugging output</td>
+   </tr>
+</table>
+
+<h2><a name="security">Security</a></h2>
+This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) read and write posts to your Mastodon account!
+<br /><br />
+If you are not the only person with access to your computer, or if you are using a shared computer, <u>please delete the files that store access credentials after using this tool</u>. <br /><br />
+There are two files to delete, both within the root of the <code>data</code> directory automatically created by the tool in its working directory (the same place you saved the mcm.jar file). These files are:
+<ul>
+  <li>clientCredentials.xml</li>
+  <li>userCredentials.xml</li>
+</ul>
+Please delete both of these files (but only these two files) after using the tool on a shared computer. You will need to authorize the tool through your browser again the next time you use it.<br /><br />
+Adding a parameter to prevent them from being saved, as a security measure, is on the to-do list for development. In the meantime, another workaround would be to use the <code>-customPort</code> parameter to specify a non-default TCP port for the tool (such as 8082, for example). This will also prevent these files from being saved.
+
+
+<h2><a name="admins">Information for instance administrators</a></h2>
+Mastodon Content Mover respects Mastodon's <a href="https://docs.joinmastodon.org/api/rate-limits/">default rate limits</a> conservatively, allowing additional time so as not to overload instances with requests. <br /><br />
+<table>
+   <tr><th>Purpose</th><th>Mastodon default minimum interval between calls</th><th>Mastodon Content Mover interval</th></tr>
+   <tr><td>General</td><td class="mid">1 second</td><td class="mid">5 seconds</td></tr>
+   <tr><td>Media uploads (per file)</td><td class="mid">60 seconds</td><td class="mid">120 seconds</td></tr>
+</table>
+<br />
+Users are also encouraged to set additional throttling, using the <code>-extraThrottle</code> parameter, to increase the number of seconds allowed between API calls.
+
+<h2><a name="more">Further information</a></h2>
+For now, any enquiries regarding this tool can be directed to <a href="https://mas.to/@tokyo_0">Tokyo Outsider</a> via Mastodon. Soon details will be made available on how to submit a problem report via Github, to report suspected bugs or difficulties with use. In the meantime, please make a note of any difficulties you encounter (ideally with a copy of the command you entered and the command line output, with <code>-showDebug</code> set to <code>yes</code>).<br /><br />Because development is at an early stage and the structure of the code is likely to change with features planned for implemention, pull requests are not likely to be approved at this time, although your interest and support is appreciated. Please follow #MastodonContentMover on Mastodon for real-time development updates!
+<br /><br />
+
+<!-- <h2><a name="commonProblems">Common problems</a></h2> <i>to follow</i>  -->
+
+<!-- <h2><a name="advanced">Advanced uses</a></h2> <i>to follow</i>  -->
+
+<!-- <h2><a name="acknowledgements">Acknowledgements</a></h2>  <i>to follow</i>  -->
+<br /><br />
+</div>
+</body>
 </html>
