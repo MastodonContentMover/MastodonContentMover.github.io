@@ -146,7 +146,7 @@ To use the tool to move your Mastodon posts between instances, you need to:<br /
    <li>Run mcm.jar again from the command line to re-post your posts to your (new) destination Mastodon instance</li>
 </ol>
 <br /><br />
-<b>Important</b>: This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) read and write posts to your Mastodon account! If you are not the only person with access to your computer, or if you are using a shared computer, please check the steps in the <a href="#security">security</a> section to ensure credentials are deleted after use.
+<b>Important</b>: This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account! If you are not the only person with access to your computer, or if you are using a shared computer, please check the steps in the <a href="#security">security</a> section to ensure credentials are deleted after use.
 <h3>Step-by-step:</h3>
 <ol>
    <li>Open a command prompt on your computer and enter "<code>java -version</code>".
@@ -221,7 +221,7 @@ Additional, optional command-line options that are currently implemented are as 
 </table>
 
 <h2><a name="security">Security</a></h2>
-This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) read and write posts to your Mastodon account!
+This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account!
 <br /><br />
 If you are not the only person with access to your computer, or if you are using a shared computer, <u>please delete the files that store access credentials after using this tool</u>. <br /><br />
 There are two files to delete, both within the root of the <code>data</code> directory automatically created by the tool in its working directory (the same place you saved the mcm.jar file). These files are:
