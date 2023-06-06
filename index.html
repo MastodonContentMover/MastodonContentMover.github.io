@@ -75,6 +75,7 @@ td.mid {
 
 <ul>
    <li><a href="#whatisMCM">What is Mastodon Content Mover?</a></li>
+   <li><a href="#whenToUse">When should I use it?</a></li>
    <li><a href="#howToUse">How do I use it?</a></li>
    <li><a href="#parameters">Parameter guide</a></li>
    <li><a href="#security">Security</a></li>
@@ -109,6 +110,7 @@ Its purpose is to allow Mastodon users to move content they value when migrating
   <li>save image focal points, and reapply them when images are re-posted</li>
   <li>identify "self-reply" threads (threads that include two or more of your own posts) and rethread them when the posts are re-posted</li>
   <li>identify "@" and "#" symbols that mark users' tags and hashtags within posts, and replace these symbols with similar-looking characters when re-posting so that hashtags and users are not inundated during re-posting (it is currently possible to disable this for hashtags)</li>
+  <li>suppress "public" posts when reposting, so that they do not disrupt the local or federated timelines (it is currently possible to disable this)</li>
   <li>save video thumbnails</li>
   <li>identify posts that are bookmarked and pinned when saving, and then re-bookmark and re-pin them when they are re-posted</li>
   <li>selectively save or re-post only posts that are bookmarked</li>
@@ -134,13 +136,22 @@ Its purpose is to allow Mastodon users to move content they value when migrating
    <li>quite a lot of other things (a to-do list in priority order will be linked here soon)</li>
 </ul>
 
+<h2><a name="whenToUse">When should I use it?</a></h2>
+It is best to use Mastodon Content Mover after you have created the account you wish to copy posts to, but before you have started migrating your followers from another account using the Mastodon migration process.<br /><br />
+There are several reasons:<br />
+<ul>
+   <li>the tool needs to be able to read and write statuses, which isn't possible when there is a redirect on the account</li>
+   <li>when the tool reposts statuses they will appear in the timelines of those following the account, so it is best to repost a high volume of statuses before you move your followers to the new account</li>
+</ul>
+If you have already migrated the account you wish to archive from and your followers have all already been moved, please disable the redirect to use Mastodon Content Mover then reapply the redirect later (you don't need to migrate the account again, you can just reapply the redirect). If you have started migrating the account but your followers have not all been moved yet, please wait for that process to complete before disabling the redirect to use the tool. Migration usually completes within 24 hours.<br />
+
 <h2><a name="howToUse">How do I use it?</a></h2>
 Mastodon Content Mover is built using Java, which means the same executable file can be run on any operating system (Windows, Mac OS, Linux etc.)<br /><br />
-Because of this, there is no installation process for the tool itself — you simply download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">one .jar file</a>. Java (or the "Java Runtime Environment") also needs to be installed on your computer to run that .jar file. Java is free to download and use, and can be downloaded from <a href="https://www.java.com/en/">the official Java website</a>.
+Because of this, there is no installation process for the tool itself — you simply download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">one .jar file</a>. Java (or the "Java Runtime Environment") also needs to be installed on your computer to run that .jar file. Java is free to download and use, and can be downloaded from <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a>.
 <br /><br />
 To use the tool to move your Mastodon posts between instances, you need to:<br />
 <ol>
-   <li>If necessary, download Java from the <a href="https://www.java.com/en/">the official Java website</a> and install it</li>
+   <li>If necessary, download the latest release of Java from the <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a> and install it</li>
    <li>Download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a>, the .jar file for Mastodon Content Mover</li>
    <li>Run mcm.jar from the command line on your computer to save your posts from your source Mastodon instance</li>
    <li>Run mcm.jar again from the command line to re-post your posts to your (new) destination Mastodon instance</li>
@@ -204,6 +215,10 @@ Additional, optional command-line options that are currently implemented are as 
    <tr>
       <td><code><b>-customPort</b><code></td>
       <td><code>8081</code> by default, or a custom TCP port to use briefly on the local computer when you authorize the tool using OAuth in your browser</td>
+   </tr>
+   <tr>
+      <td><code><b>-suppressPublic</b><code><br /><i><span style="font-size: 90%; color: red">(from v00.01.03)</span></i></td>
+      <td><code>yes</code> by default (reposts public statuses in the archive as unlisted statuses on the instance you are reposting to). Use <code>no</code> to retain public visiblity for public statuses in the archive (this will cause them to appear in the local and federated timelines)</td>
    </tr>
    <tr>
       <td><code><b>-from</b><code></td>
