@@ -1,0 +1,64 @@
+﻿
+
+
+body {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  line-height: 1.6;
+  font-family:  Meiryo, Segoe UI, sans-serif;
+  font-size: 97%;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  padding-top: 1.2em;
+}
+
+h3 {
+  padding-top: 1.2em;
+}
+
+.page {
+  width: 90%;
+  position: relative;
+  left: 5%;
+  padding-top: 3em;
+}
+
+table, th, td {
+  border-width: 0.5px;
+  border-style: solid;
+}
+
+td {
+  padding: 0.4em;
+}
+
+th {
+  padding: 0.4em;
+}
+
+td.mid {
+  text-align: center;
+}
+
+
+@media (min-device-width: 480px) {
+  /* For desktop: */
+
+  .page {
+    width: 80%;
+    left: 10%;
+  }
+
+}
+

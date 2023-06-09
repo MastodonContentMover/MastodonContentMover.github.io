@@ -1,80 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-
-body {
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-  line-height: 1.6;
-  font-family:  Meiryo, Segoe UI, sans-serif;
-  font-size: 97%;
-}
-
-div {
-  box-sizing: border-box;
-}
-
-li {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
-h2 {
-  padding-top: 1.2em;
-}
-
-h3 {
-  padding-top: 1.2em;
-}
-
-.page {
-  width: 90%;
-  position: relative;
-  left: 5%;
-  padding-top: 3em;
-}
-
-table, th, td {
-  border-width: 0.5px;
-  border-style: solid;
-}
-
-td {
-  padding: 0.4em;
-}
-
-th {
-  padding: 0.4em;
-}
-
-td.mid {
-  text-align: center;
-}
-
-
-@media (min-device-width: 480px) {
-  /* For desktop: */
-
-  .page {
-    width: 80%;
-    left: 10%;
-  }
-
-}
-
-
-</style>
-<title>Mastodon Content Mover</title> 
+<link rel="stylesheet" type="text/css" href="style.css" media="screen, print"/>
+<title>MastodonContentMover</title> 
 </head>
 <body>
 <div class="page">
-<h1>Mastodon Content Mover</h1>
+<h1>MastodonContentMover</h1>
 
 
 <ul>
-   <li><a href="#whatisMCM">What is Mastodon Content Mover?</a></li>
+   <li><a href="#whatisMCM">What is MastodonContentMover?</a></li>
    <li><a href="#whenToUse">When should I use it?</a></li>
    <li><a href="#howToUse">How do I use it?</a></li>
    <li><a href="#parameters">Parameter guide</a></li>
@@ -83,23 +19,24 @@ td.mid {
 <!--   <li><a href="#bugReports">How to report bugs (fix link here!!)</a></li>  -->
    <li><a href="#admins">Information for instance administrators</a></li></li>
 <!--   <li><a href="#advanced">Advanced</a></li>  -->
-<!--   <li><a href="#acknowledgements">Acknowledgements</a></li>  -->
    <li><a href="#more">Further information</a></li></li>
+   <li><a href="#acknowledgements">Acknowledgements</a></li>
+
 </ul>
 <hr />
 <h2>Important</h2>
-<span style="color: red; font-weight: bold">Mastodon Content Mover is currently in development</span>. The current, early-stage development testing version is available <u>for development testing purposes only</u>. It is likely to fail in ungainly and/or unexpected ways, produce ugly error messages, or maybe just plain not work at all. Please be aware that <u>you use it at your own risk</u>. The authors of this tool accept no responsibility for any data undesirably lost or created through its use, or any ill effects due to its misuse.
+<span style="color: red; font-weight: bold">MastodonContentMover is currently in development</span>. The current, early-stage development testing version is available <u>for development testing purposes only</u>. It is likely to fail in ungainly and/or unexpected ways, produce ugly error messages, or maybe just plain not work at all. Please be aware that <u>you use it at your own risk</u>. The authors of this tool accept no responsibility for any data undesirably lost or created through its use, or any ill effects due to its misuse.
 <br /><br />
 
 <hr />
 <h2>What's new?</h2>
-Development release v0.01.02: Emergency fix for issue when trying to re-post statuses with media attachments while running tool from a JAR file
+<b>Development release v0.01.03</b>: Adding ability to identify and manage reposting to instances with a shorter post character limit, option to suppress public posts, calculation of estimated duration for saving and reposting, and other minor enhancements (<a href="versions.html">version history</a>)
 <br /><br />
-<i>Last updated Thursday May 25, 2023</i>
+<i>Last update Friday June 9, 2023</i>
 <hr />
 
-<h2><a name="whatisMCM">What is Mastodon Content Mover?</a></h2>
-Mastodon Content Mover is a command-line tool that downloads your posts from one Mastodon instance, saving them as a set of files on your computer, and then re-posts them on any other Mastodon instance.<br /><br />
+<h2><a name="whatisMCM">What is MastodonContentMover?</a></h2>
+MastodonContentMover is a command-line tool that downloads your posts from one Mastodon instance, saving them as a set of files on your computer, and then re-posts them on any other Mastodon instance.<br /><br />
 Its purpose is to allow Mastodon users to move content they value when migrating from one instance to another, which is not currently possible within Mastodon itself.
 <h3>What can it do?</h3>
 <h4>It can:</h4>
@@ -126,38 +63,38 @@ Its purpose is to allow Mastodon users to move content they value when migrating
 
 <h4>It cannot <u><i>yet</i></u>:</h4>
 <ul>
-   <li>repost statuses from a Mastodon instance with a longer character limit for posts to an instance with a shorter character limit for posts</li>
    <li>add to an existing archive of posts on your computer (allowing you to resume saving posts if the network connection fails during that process, or to incrementally backup posts on a regular basis)</li>
+   <li>use a Mastodon archive file as a source for post data</li>
    <li>save custom emojis</li>
    <li>re-apply downloaded video thumbnails when videos are re-posted</li>
-   <li>use a Mastodon archive file as a source for post data</li>
-   <li>save and restore users' notes written on the profiles of other users</li>
    <li>save and restore lists</li>
    <li>quite a lot of other things (a to-do list in priority order will be linked here soon)</li>
+   <li><strike>repost statuses from a Mastodon instance with a longer character limit for posts to an instance with a shorter character limit for posts</strike> <i>available from v00.01.03</i></li>
+   <li><strike>save and restore users' notes written on the profiles of other users</strike> <i>no longer needed (included in Mastodon core from around mid-May)</i></li>
 </ul>
 
 <h2><a name="whenToUse">When should I use it?</a></h2>
-It is best to use Mastodon Content Mover after you have created the account you wish to copy posts to, but before you have started migrating your followers from another account using the Mastodon migration process.<br /><br />
+It is best to use MastodonContentMover after you have created the account you wish to copy posts to, but before you have started migrating your followers from another account using the Mastodon migration process.<br /><br />
 There are several reasons:<br />
 <ul>
    <li>the tool needs to be able to read and write statuses, which isn't possible when there is a redirect on the account</li>
    <li>when the tool reposts statuses they will appear in the timelines of those following the account, so it is best to repost a high volume of statuses before you move your followers to the new account</li>
 </ul>
-If you have already migrated the account you wish to archive from and your followers have all already been moved, please disable the redirect to use Mastodon Content Mover then reapply the redirect later (you don't need to migrate the account again, you can just reapply the redirect). If you have started migrating the account but your followers have not all been moved yet, please wait for that process to complete before disabling the redirect to use the tool. Migration usually completes within 24 hours.<br />
+If you have already migrated the account you wish to archive from and your followers have all already been moved, please disable the redirect to use MastodonContentMover then reapply the redirect later (you don't need to migrate the account again, you can just reapply the redirect). If you have started migrating the account but your followers have not all been moved yet, please wait for that process to complete before disabling the redirect to use the tool. Migration usually completes within 24 hours.<br />
 
 <h2><a name="howToUse">How do I use it?</a></h2>
-Mastodon Content Mover is built using Java, which means the same executable file can be run on any operating system (Windows, Mac OS, Linux etc.)<br /><br />
+MastodonContentMover is built using Java, which means the same executable file can be run on any operating system (Windows, Mac OS, Linux etc.)<br /><br />
 Because of this, there is no installation process for the tool itself — you simply download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">one .jar file</a>. Java (or the "Java Runtime Environment") also needs to be installed on your computer to run that .jar file. Java is free to download and use, and can be downloaded from <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a>.
 <br /><br />
 To use the tool to move your Mastodon posts between instances, you need to:<br />
 <ol>
    <li>If necessary, download the latest release of Java from the <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a> and install it</li>
-   <li>Download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a>, the .jar file for Mastodon Content Mover</li>
+   <li>Download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a>, the .jar file for MastodonContentMover</li>
    <li>Run mcm.jar from the command line on your computer to save your posts from your source Mastodon instance</li>
    <li>Run mcm.jar again from the command line to re-post your posts to your (new) destination Mastodon instance</li>
 </ol>
 <br /><br />
-<b>Important</b>: This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account! If you are not the only person with access to your computer, or if you are using a shared computer, please check the steps in the <a href="#security">security</a> section to ensure credentials are deleted after use.
+<b><span style="color: red">Important</span></b>: This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account! If you are not the only person with access to your computer, or if you are using a shared computer, please check the steps in the <a href="#security">security</a> section to ensure credentials are deleted after use.
 <h3>Step-by-step:</h3>
 <ol>
    <li>Open a command prompt on your computer and enter "<code>java -version</code>".
@@ -166,21 +103,21 @@ To use the tool to move your Mastodon posts between instances, you need to:<br /
          <li>If no installed version is displayed (or if the version number is less than 17.0.5), close the window then download and install Java from <a href="https://www.oracle.com/java/technologies/downloads/">the official website</a>. Then open a fresh command prompt and check again that "<code>java -version</code>" displays the currently installed version of Java.</li>
       </ul>
    </li>
-   <li>Create a new directory for Mastodon Content Mover, then download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a> from the project Github repository and put it in that directory.</li>
-   <li>Using the command prompt, move to your Mastodon Content Mover directory.</li>
+   <li>Create a new directory for MastodonContentMover, then download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a> from the project Github repository and put it in that directory.</li>
+   <li>Using the command prompt, move to your MastodonContentMover directory.</li>
    <li>Run the following command, substituting the bold parameters: the domain name for your source Mastodon instance (the one you wish to save from), your username on the source instance, and the name you would like to use for the archive folder on your computer where post data will be saved.<br /> 
 <code>java -jar mcm.jar save -instance:<b>myOldInstance.social</b> -username:<b>myOldUsername</b> -archiveName:<b>myPosts</b></code><br /> </li>
-   <li>Follow the prompts as needed to grant read and write permissions to Mastodon Content Mover using OAuth, then wait for your posts to be saved.</li>
+   <li>Follow the prompts as needed to grant read and write permissions to MastodonContentMover using OAuth, then wait for your posts to be saved.</li>
    <li>To re-post your Mastodon posts to a new instance, run the following command, substituting the bold parameters: the domain name for your destination Mastodon instance, your username on the new instance, and the name you used in the previous step to save your post data.<br /> 
 <code>java -jar mcm.jar post -instance:<b>myNewInstance.world</b> -username:<b>myNewUsername</b> -archiveName:<b>myPosts</b></code><br /></li>
-   <li>Follow the prompts as needed to grant read and write permissions to Mastodon Content Mover using OAuth, then wait for your posts to be re-posted.</li>
+   <li>Follow the prompts as needed to grant read and write permissions to MastodonContentMover using OAuth, then wait for your posts to be re-posted.</li>
 </ol>
 <h2><a name="parameters">Parameter guide</a></h2>
 The main, required command-line options are as follows:<br /><br />
 <table>
    <tr>
       <td>either <code><b>save</b></code> or <code><b>post</b></code></td>
-      <td>according to whether you wish to <code>save</code> your existing posts from a Mastodon instance to your computer, or re-<code>post</code> them from a Mastodon Content Mover archive on your computer to a Mastodon instance</td>
+      <td>according to whether you wish to <code>save</code> your existing posts from a Mastodon instance to your computer, or re-<code>post</code> them from a MastodonContentMover archive on your computer to a Mastodon instance</td>
    </tr>
    <tr>
       <td><code><b>-instance</b><code></td>
@@ -192,7 +129,7 @@ The main, required command-line options are as follows:<br /><br />
    </tr>
    <tr>
       <td><code><b>-archiveName</b><code></td>
-      <td>the name of the archive you would like to save to (create) or post from — this will be used to create or read from a folder within the <code>data</code> directory that will be created in your Mastodon Content Mover directory the first time the tool is run</td>
+      <td>the name of the archive you would like to save to (create) or post from — this will be used to create or read from a folder within the <code>data</code> directory that will be created in your MastodonContentMover directory the first time the tool is run</td>
    </tr>
 </table>
 
@@ -210,14 +147,14 @@ Additional, optional command-line options that are currently implemented are as 
    </tr>
    <tr>
       <td><code><b>-extraThrottle</b><code></td>
-      <td>the number of additional seconds to wait between each API call (interaction with a given Mastodon instance)</td>
+      <td><code>0</code> by default. The number of additional seconds to wait between each API call (interaction with a given Mastodon instance)</td>
    </tr>
    <tr>
       <td><code><b>-customPort</b><code></td>
       <td><code>8081</code> by default, or a custom TCP port to use briefly on the local computer when you authorize the tool using OAuth in your browser</td>
    </tr>
    <tr>
-      <td><code><b>-suppressPublic</b><code><br /><i><span style="font-size: 90%; color: red">(from v00.01.03)</span></i></td>
+      <td><code><b>-suppressPublic</b><code><br /></td>
       <td><code>yes</code> by default (reposts public statuses in the archive as unlisted statuses on the instance you are reposting to). Use <code>no</code> to retain public visiblity for public statuses in the archive (this will cause them to appear in the local and federated timelines)</td>
    </tr>
    <tr>
@@ -237,20 +174,20 @@ Additional, optional command-line options that are currently implemented are as 
 <h2><a name="security">Security</a></h2>
 This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account!
 <br /><br />
-If you are not the only person with access to your computer, or if you are using a shared computer, <u>please delete the files that store access credentials after using this tool</u>. <br /><br />
+If you are not the only person with access to your computer, or if you are using a shared computer, <u>please delete the files that store access credentials after using this tool</u>.<br /><br />
 There are two files to delete, both within the root of the <code>data</code> directory automatically created by the tool in its working directory (the same place you saved the mcm.jar file). These files are:
 <ul>
   <li>clientCredentials.xml</li>
   <li>userCredentials.xml</li>
 </ul>
 Please delete both of these files (but only these two files) after using the tool on a shared computer. You will need to authorize the tool through your browser again the next time you use it.<br /><br />
-Adding a parameter to prevent them from being saved, as a security measure, is on the to-do list for development. In the meantime, another workaround would be to use the <code>-customPort</code> parameter to specify a non-default TCP port for the tool (such as 8082, for example). This will also prevent these files from being saved.
-
+Adding a parameter to prevent them from being saved, as a security measure, is on the to-do list for development. In the meantime, another workaround would be to use the <code>-customPort</code> parameter to specify a non-default TCP port for the tool (such as 8082, for example). This will also prevent these files from being saved.<br /><br />
+Alternatively, please consider running MastodonContentMover from a removeable drive such as a USB drive.
 
 <h2><a name="admins">Information for instance administrators</a></h2>
-Mastodon Content Mover respects Mastodon's <a href="https://docs.joinmastodon.org/api/rate-limits/">default rate limits</a> conservatively, allowing additional time so as not to overload instances with requests. <br /><br />
+MastodonContentMover respects Mastodon's <a href="https://docs.joinmastodon.org/api/rate-limits/">default rate limits</a> conservatively, allowing additional time so as not to overload instances with requests. <br /><br />
 <table>
-   <tr><th>Purpose</th><th>Mastodon default minimum interval between calls</th><th>Mastodon Content Mover interval</th></tr>
+   <tr><th>Purpose</th><th>Mastodon default minimum interval between calls</th><th>MastodonContentMover interval</th></tr>
    <tr><td>General</td><td class="mid">1 second</td><td class="mid">5 seconds</td></tr>
    <tr><td>Media uploads (per file)</td><td class="mid">60 seconds</td><td class="mid">120 seconds</td></tr>
 </table>
@@ -262,15 +199,23 @@ For now, any enquiries regarding this tool can be directed to <a rel="me" href="
 <br /><br />
 Because development is at an early stage and the structure of the code is likely to change with features planned for implemention, pull requests are not likely to be approved at this time, although your interest and support is appreciated. Please follow #MastodonContentMover on Mastodon for real-time development updates!
 <br /><br />
-Source code is <a href="https://github.com/MastodonContentMover/repo">available on Github</a>. Javadocs for the source <a href="javadocs/">are also available</a>.
-<br /><br />
+See also:
+<ul>
+   <li><a href="https://github.com/MastodonContentMover/repo">Source code</a> on Github</li>
+   <li><a href="javadocs/">Javadocs</a> for the source</li>
+   <li>The full <a href="versions.html">version history</a></li>
+</ul>
 
 <!-- <h2><a name="commonProblems">Common problems</a></h2> <i>to follow</i>  -->
 
 <!-- <h2><a name="advanced">Advanced uses</a></h2> <i>to follow</i>  -->
 
-<!-- <h2><a name="acknowledgements">Acknowledgements</a></h2>  <i>to follow</i>  -->
-<br /><br />
+<h2><a name="acknowledgements">Acknowledgements</a></h2>
+Creating MastodonContentMover would not have been possible without the immense efforts and tireless dedication of <a href="https://fosstodon.org/@andregasser">André Gasser</a> and <a href="https://fosstodon.org/@bocops">bocops</a>, who built the <a href="https://github.com/andregasser/bigbone">BigBone Java/Kotlin library</a> on which this tool relies (extending and updating the earlier <a href="https://github.com/sys1yagi/mastodon4j">Mastodon4J</a> library written by Toshihiro Yagi). Their guidance, encouragement and patience has been invaluable throughout.<br/><br/>
+I'd like to bring attention to the pioneering work of <a href="https://macgirvin.com/channel/mike">Mike Macgirvin</a>, who built seamless identity and content portability into his Zot protocol, offering an impressive model of what can technically be achieved. While stumbling blocks with ActivityPub interoperability in Hubzilla, the main platform that uses Zot, led me to return to Mastodon and build MastodonContentMover as a stopgap, the portability demonstrated is an ideal to which all Fediverse platforms will hopefully aspire.<br/><br/> 
+The <a href="https://joinmastodon.org/about">Mastodon team</a> must also be thanked for their work on Mastodon itself; while their decision not to incorporate content portability into their migration mechanism (so far) has left a gap that I hope this tool will at least partially fill, they have nonetheless created the most stable, polished and functionally complete platform I've seen for short message social networking on the Fediverse.<br/><br/>
+Last but certainly not least, my enduring love, respect and gratitude to Sourabh, without whose kindness and inspiration this tool would not exist.<br/><br/>
+<br/>
 </div>
 </body>
 </html>

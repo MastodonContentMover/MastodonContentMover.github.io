@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css" media="screen, print"/>
+<title>Versions | MastodonContentMover</title> 
+</head>
+<body>
+<div class="page">
+<h1>Version history</h1>
+<a href="..">back to the main page</a><br /><br />
+<hr />
+<b>Development release v0.01.03 <span style="color: red">(latest)</span></b> - <i>Friday June 9, 2023</i><br /><br />
+Adding ability to identify and manage reposting to instances with a shorter post character limit, option to suppress public posts, calculation of estimated duration for saving and reposting, and other minor enhancements
+<ul>
+  <li>adding parameter to suppress posts from public timeline</li>
+  <li>adding code to detect when post length exceeds instance length limit, and split post into segments</li>
+  <li>adding mechanism to account for urls being counted by Mastodon at a fixed length of 23 characters, used to check posts are within instance length limit and also for segmenting</li>
+  <li>improving mechanism used to find whitespace in posts, used for post segmenting, so it works with international space characters (not just the regular latin space)</li>
+  <li>removing client and OAuth access tokens from full debug output</li>
+  <li>upgrading to BigBone snapshot 18</li>
+  <li>adding calcuation and display of estimated duration for saving and reposting operations</li>
+</ul>
+<br /><br />
+<hr />
+<b>Development release v0.01.02</b> - <i>Thursday May 25, 2023</i><br /><br />
+Emergency fix for failure to load image files when running from .jar file
+<ul>
+  <li>Emergency fix for issue when re-posting statuses with media attachments while running tool from a .jar file</li>
+</ul>
+<br /><br />
+
+<hr />
+<b>Development release v0.01.01</b> - <i>Wednesday May 24, 2023</i><br /><br />
+Emergency fix for failure on boosts (which is not implemented yet, but it was trying anyway!) 
+<ul>
+  <li>Emergency fix for failure on boosts (with no text in the post)</li>
+  <li>Change to variable name in Mover.java ("instanceId" to "irtInstanceId") for clarity (unrelated to fix)</li>
+</ul>
+<br /><br />
+
+<hr />
+<b>Development release v0.01.00</b> - <i>Sunday May 21, 2023</i><br /><br />
+Initial release for development testing &#127881;
+<br /><br />
+<a href="..">back to the main page</a><br /><br />
+<br/>
+</div>
+</body>
+</html>
