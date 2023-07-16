@@ -108,10 +108,10 @@ If you have already migrated the account you wish to archive from and your follo
    </li>
    <li>Create a new directory for MastodonContentMover, then download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a> from the project Github repository and put it in that directory.</li>
    <li>Using the command prompt, move to your MastodonContentMover directory.</li>
-   <li>Run the following command, substituting the bold, red parameters: the domain name for your source Mastodon instance (the one you wish to save from), your username on the source instance, and the name you would like to use for the archive folder on your computer where post data will be saved.<br /> 
+   <li>Run the following command, substituting the bold, red parameters: the domain name for your source Mastodon instance (the one you wish to save from), your username on the source instance, and the name you would like to use for the archive folder on your computer where post data will be saved. The command should be entered as one line.<br /> 
 <div class="exampleCommand"><code>java -jar mcm.jar save -instance:<b><span style="color: red">myOldInstance.social</span></b> -username:<b><span style="color: red">myOldUsername</span></b> -archiveName:<b><span style="color: red">myPosts</span></b></code></div><br /> </li>
    <li>Follow the prompts as needed to grant read and write permissions to MastodonContentMover using OAuth, then wait for your posts to be saved.</li>
-   <li>To re-post your Mastodon posts to a new instance, run the following command, substituting the bold, red parameters: the domain name for your destination Mastodon instance, your username on the new instance, and the name you used in the previous step to save your post data.<br /> 
+   <li>To re-post your Mastodon posts to a new instance, run the following command, substituting the bold, red parameters: the domain name for your destination Mastodon instance, your username on the new instance, and the name you used in the previous step to save your post data.  The command should be entered as one line.<br /> 
 <div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b><span style="color: red">myNewInstance.world</span></b> -username:<b><span style="color: red">myNewUsername</span></b> -archiveName:<b><span style="color: red">myPosts</span></b></code></div><br /></li>
    <li>Follow the prompts as needed to grant read and write permissions to MastodonContentMover using OAuth, then wait for your posts to be re-posted.</li>
 </ol>
