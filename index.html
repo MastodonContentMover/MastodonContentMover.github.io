@@ -14,6 +14,7 @@
    <li><a href="#whenToUse">When should I use it?</a></li>
    <li><a href="#howToUse">How do I use it?</a></li>
    <li><a href="#parameters">Parameter guide</a></li>
+   <li><a href="#examples">Example commands</a></li>
    <li><a href="#security">Security</a></li>
 <!--   <li><a href="#commonProblems">Common problems</a></li>  -->
 <!--   <li><a href="#bugReports">How to report bugs (fix link here!!)</a></li>  -->
@@ -24,12 +25,12 @@
 
 </ul>
 <hr />
-<h2>Important</h2>
+<h4>Important</h4>
 <span style="color: red; font-weight: bold">MastodonContentMover is currently in development</span>. The current, early-stage development testing version is available <u>for development testing purposes only</u>. It is likely to fail in ungainly and/or unexpected ways, produce ugly error messages, or maybe just plain not work at all. Please be aware that <u>you use it at your own risk</u>. The authors of this tool accept no responsibility for any data undesirably lost or created through its use, or any ill effects due to its misuse.
 <br /><br />
 
 <hr />
-<h2>What's new?</h2>
+<h4>What's new?</h4>
 <b>Development release v0.01.03</b>: Adding ability to identify and manage reposting to instances with a shorter post character limit, option to suppress public posts, calculation of estimated duration for saving and reposting, and other minor enhancements (<a href="versions.html">version history</a>)
 <br /><br />
 <i>Last update Friday June 9, 2023</i>
@@ -77,7 +78,7 @@ Its purpose is to allow Mastodon users to move content they value when migrating
    <li><strike>repost statuses from a Mastodon instance with a longer character limit for posts to an instance with a shorter character limit for posts</strike> <i>available from v00.01.03</i></li>
    <li><strike>save and restore users' notes written on the profiles of other users</strike> <i>no longer needed (included in Mastodon core from around mid-May)</i></li>
 </ul>
-
+<hr />
 <h2><a name="whenToUse">When should I use it?</a></h2>
 It is best to use MastodonContentMover after you have created the account you wish to copy posts to, but before you have started migrating your followers from another account using the Mastodon migration process.<br /><br />
 There are several reasons:<br />
@@ -86,19 +87,16 @@ There are several reasons:<br />
    <li>when the tool reposts statuses they will appear in the timelines of those following the account, so it is best to repost a high volume of statuses before you move your followers to the new account</li>
 </ul>
 If you have already migrated the account you wish to archive from and your followers have all already been moved, please disable the redirect to use MastodonContentMover then reapply the redirect later (you don't need to migrate the account again, you can just reapply the redirect). If you have started migrating the account but your followers have not all been moved yet, please wait for that process to complete before disabling the redirect to use the tool. Migration usually completes within 24 hours.<br />
-
+<hr />
 <h2><a name="howToUse">How do I use it?</a></h2>
-MastodonContentMover is built using Java, which means the same executable file can be run on any operating system (Windows, Mac OS, Linux etc.)<br /><br />
-Because of this, there is no installation process for the tool itself — you simply download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">one .jar file</a>. Java (or the "Java Runtime Environment") also needs to be installed on your computer to run that .jar file. Java is free to download and use, and can be downloaded from <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a>.
-<br /><br />
-To use the tool to move your Mastodon posts between instances, you need to:<br />
+
 <ol>
-   <li>If necessary, download the latest release of Java from the <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a> and install it</li>
+   <li>If necessary, download the latest release of Java from the <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a> and install it. MastodonContentMover runs within Java, similar to the way games like PUBG or Counter-Strike run on Steam.</li>
    <li>Download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a>, the .jar file for MastodonContentMover</li>
    <li>Run mcm.jar from the command line on your computer to save your posts from your source Mastodon instance</li>
    <li>Run mcm.jar again from the command line to re-post your posts to your (new) destination Mastodon instance</li>
 </ol>
-<br /><br />
+
 <b><span style="color: red">Important</span></b>: This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account! If you are not the only person with access to your computer, or if you are using a shared computer, please check the steps in the <a href="#security">security</a> section to ensure credentials are deleted after use.
 <h3>Step-by-step:</h3>
 <ol>
@@ -110,13 +108,19 @@ To use the tool to move your Mastodon posts between instances, you need to:<br /
    </li>
    <li>Create a new directory for MastodonContentMover, then download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">mcm.jar</a> from the project Github repository and put it in that directory.</li>
    <li>Using the command prompt, move to your MastodonContentMover directory.</li>
-   <li>Run the following command, substituting the bold parameters: the domain name for your source Mastodon instance (the one you wish to save from), your username on the source instance, and the name you would like to use for the archive folder on your computer where post data will be saved.<br /> 
-<code>java -jar mcm.jar save -instance:<b>myOldInstance.social</b> -username:<b>myOldUsername</b> -archiveName:<b>myPosts</b></code><br /> </li>
+   <li>Run the following command, substituting the bold, red parameters: the domain name for your source Mastodon instance (the one you wish to save from), your username on the source instance, and the name you would like to use for the archive folder on your computer where post data will be saved.<br /> 
+<div class="exampleCommand"><code>java -jar mcm.jar save -instance:<b><span style="color: red">myOldInstance.social</span></b> -username:<b><span style="color: red">myOldUsername</span></b> -archiveName:<b><span style="color: red">myPosts</span></b></code></div><br /> </li>
    <li>Follow the prompts as needed to grant read and write permissions to MastodonContentMover using OAuth, then wait for your posts to be saved.</li>
-   <li>To re-post your Mastodon posts to a new instance, run the following command, substituting the bold parameters: the domain name for your destination Mastodon instance, your username on the new instance, and the name you used in the previous step to save your post data.<br /> 
-<code>java -jar mcm.jar post -instance:<b>myNewInstance.world</b> -username:<b>myNewUsername</b> -archiveName:<b>myPosts</b></code><br /></li>
+   <li>To re-post your Mastodon posts to a new instance, run the following command, substituting the bold, red parameters: the domain name for your destination Mastodon instance, your username on the new instance, and the name you used in the previous step to save your post data.<br /> 
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b><span style="color: red">myNewInstance.world</span></b> -username:<b><span style="color: red">myNewUsername</span></b> -archiveName:<b><span style="color: red">myPosts</span></b></code></div><br /></li>
    <li>Follow the prompts as needed to grant read and write permissions to MastodonContentMover using OAuth, then wait for your posts to be re-posted.</li>
 </ol>
+<h4>Notes</h4>
+Because MastodonContentMover is built using Java, the same executable file can be run on any operating system (Windows, Mac OS, Linux etc.)<br /><br />
+Because of this, there is no installation process for the tool itself — you simply download <a href="https://github.com/MastodonContentMover/repo/raw/main/mcm.jar">the .jar file</a>. Java (or the "Java Runtime Environment") also needs to be installed on your computer to run that .jar file. Java is free to download and use, and can be downloaded from <a href="https://www.oracle.com/java/technologies/downloads/">the Oracle Java website</a>.
+
+
+<hr />
 <h2><a name="parameters">Parameter guide</a></h2>
 The main, required command-line options are as follows:<br /><br />
 <table>
@@ -175,7 +179,60 @@ Additional, optional command-line options that are currently implemented are as 
       <td><code>no</code> by default, <code>yes</code> to display additional debugging output</td>
    </tr>
 </table>
+<hr />
+<h2><a name="examples">Example commands</a></h2>
 
+<i>Note: These commands may wrap onto multiple lines when shown here, but should be entered as one single line.</i>
+<br /><br />
+Saving posts from account <code>@Gargron</code> on <a href="https://mastodon.social">https://mastodon.social</a> to an archive called <code>localBackup</code>:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar save -instance:<b><span style="color: red">mastodon.social</span></b> -username:<b><span style="color: red">gargron</span></b> -archiveName:<b><span style="color: red">localBackup</span></b></code></div>
+<br/><br/>
+
+Re-posting saved posts from the same archive to a new account, <code>GargronRelocated</code>, on <a href="https://mstdn.social">https://mstdn.social</a>:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b><span style="color: red">mstdn.social</span></b> -username:<b><span style="color: red">gargronRelocated</span></b> -archiveName:<b>localBackup</b></code></div>
+<br/><br/>
+
+Re-posting only the saved posts that were bookmarked:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-bookmarkedOnly:yes</span></b></code></div>
+<br/><br/>
+
+Re-posting saved posts with hashtags intact (hashtagged posts will appear in home timelines of hashtag followers and in hashtag searches):<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-preserveHashtags:yes</span></b></code></div>
+<br/><br/>
+
+Re-posting saved posts with public posts intact (public posts will appear in local and federated timelines):<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-suppressPublic:no</span></b></code></div>
+<br/><br/>
+
+Re-posting only saved posts with archive timestamps before midnight March 6, 2023:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-until:2023-03-06T00:00:00.000Z</span></b></code></div>
+<br/><br/>
+
+Re-posting only saved posts with archive timestamps between midnight March 6, 2023, and midnight March 9, 2023:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-from:2023-03-06T00:00:00.000Z -until:2023-03-09T00:00:00.000Z</span></b></code></div>
+<br/><br/>
+
+Re-posting only saved posts with archive timestamps after midnight March 9, 2023:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-from:2023-03-09T00:00:00.000Z</span></b></code></div>
+<br/><br/>
+
+Re-posting saved posts with an additional delay of 120 seconds between each API call (each request sent to the Mastodon instance):<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-extraThrottle:120</span></b></code></div>
+<br/><br/>
+
+Re-posting only the saved posts that were bookmarked and with archive timestamps between midnight March 6, 2023, and midnight March 9, 2023, with hashtags and public posts intact and an additional delay of 120 seconds between each API call:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-bookmarkedOnly:yes</span></b> <b><span style="color: red">-from:2023-03-06T00:00:00.000Z -until:2023-03-09T00:00:00.000Z</span></b> <b><span style="color: red">-preserveHashtags:yes</span></b> <b><span style="color: red">-suppressPublic:no</span></b> <b><span style="color: red">-extraThrottle:120</span></b></code></div>
+<br/><br/>
+
+Saving posts from account <code>@Gargron</code> on <a href="https://mastodon.social">https://mastodon.social</a> to an archive called <code>localBackup</code> with debug messages displayed:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar save -instance:<b>mastodon.social</b> -username:<b>gargron</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-showDebug:yes</span></b></code></div>
+<br/><br/>
+
+Re-posting only the saved posts that were bookmarked and with archive timestamps between midnight March 6, 2023, and midnight March 9, 2023, with hashtags and public posts intact, an additional delay of 120 seconds between each API call, and debug messages displayed:<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b>-bookmarkedOnly:yes</b> <b>-from:2023-03-06T00:00:00.000Z -until:2023-03-09T00:00:00.000Z</b> <b>-preserveHashtags:yes</b> <b>-suppressPublic:no</b> <b>-extraThrottle:120</b> <b><span style="color: red">-showDebug:yes</span></b></code></div>
+<br/><br/>
+
+<hr />
 <h2><a name="security">Security</a></h2>
 This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account!
 <br /><br />
@@ -189,6 +246,7 @@ Please delete both of these files (but only these two files) after using the too
 Adding a parameter to prevent them from being saved, as a security measure, is on the to-do list for development. In the meantime, another workaround would be to use the <code>-customPort</code> parameter to specify a non-default TCP port for the tool (such as 8082, for example). This will also prevent these files from being saved.<br /><br />
 Alternatively, please consider running MastodonContentMover from a removeable drive such as a USB drive.
 
+<hr />
 <h2><a name="admins">Information for instance administrators</a></h2>
 MastodonContentMover respects Mastodon's <a href="https://docs.joinmastodon.org/api/rate-limits/">default rate limits</a> conservatively, allowing additional time so as not to overload instances with requests. <br /><br />
 <table>
@@ -199,6 +257,7 @@ MastodonContentMover respects Mastodon's <a href="https://docs.joinmastodon.org/
 <br />
 Users are also encouraged to set additional throttling, using the <code>-extraThrottle</code> parameter, to increase the number of seconds allowed between API calls.
 
+<hr />
 <h2><a name="more">Further information</a></h2>
 For now, any enquiries regarding this tool can be directed to <a rel="me" href="https://mas.to/@tokyo_0">Tokyo Outsider</a> via Mastodon. Soon details will be made available on how to submit a problem report via Github, to report suspected bugs or difficulties with use. In the meantime, please make a note of any difficulties you encounter (ideally with a copy of the command you entered and the command line output, with <code>-showDebug</code> set to <code>yes</code>).
 <br /><br />
@@ -215,6 +274,7 @@ See also:
 
 <!-- <h2><a name="advanced">Advanced uses</a></h2> <i>to follow</i>  -->
 
+<hr />
 <h2><a name="acknowledgements">Acknowledgements</a></h2>
 Creating MastodonContentMover would not have been possible without the immense efforts and tireless dedication of <a href="https://fosstodon.org/@andregasser">André Gasser</a> and <a href="https://fosstodon.org/@bocops">bocops</a>, who built the <a href="https://github.com/andregasser/bigbone">BigBone Java/Kotlin library</a> on which this tool relies (extending and updating the earlier <a href="https://github.com/sys1yagi/mastodon4j">Mastodon4J</a> library written by Toshihiro Yagi). Their guidance, encouragement and patience has been invaluable throughout.<br/><br/>
 I'd like to bring attention to the pioneering work of <a href="https://macgirvin.com/channel/mike">Mike Macgirvin</a>, who built seamless identity and content portability into his Zot protocol, offering an impressive model of what can technically be achieved. While stumbling blocks with ActivityPub interoperability in Hubzilla, the main platform that uses Zot, led me to return to Mastodon and build MastodonContentMover as a stopgap, the portability demonstrated is an ideal to which all Fediverse platforms will hopefully aspire.<br/><br/> 
