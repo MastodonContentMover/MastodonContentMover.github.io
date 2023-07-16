@@ -232,6 +232,14 @@ Re-posting only the saved posts that were bookmarked and with archive timestamps
 <div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b>-bookmarkedOnly:yes</b> <b>-from:2023-03-06T00:00:00.000Z -until:2023-03-09T00:00:00.000Z</b> <b>-preserveHashtags:yes</b> <b>-suppressPublic:no</b> <b>-extraThrottle:120</b> <b><span style="color: red">-showDebug:yes</span></b></code></div>
 <br/><br/>
 
+Saving posts from account <code>@Gargron</code> on <a href="https://mastodon.social">https://mastodon.social</a> to an archive called <code>localBackup</code> while using custom port 8080 to authenticate via OAuth (when using a custom port, credentials are not saved):<br />
+<div class="exampleCommand"><code>java -jar mcm.jar save -instance:<b>mastodon.social</b> -username:<b>gargron</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-customPort:8080</span></b></code></div>
+<br/><br/>
+
+Re-posting saved posts from the same archive to a new account, <code>@GargronRelocated</code>, on <a href="https://mstdn.social">https://mstdn.social</a> while using custom port 8080 to authenticate via OAuth (credentials are not saved):<br />
+<div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-customPort:8080</span></b></code></div>
+<br/><br/>
+
 <hr />
 <h2><a name="security">Security</a></h2>
 This tool saves an access token for your Mastodon account(s) to your computer's hard drive. If someone else obtains a copy of that token, they may be able to use it (in a different tool, or in this one) to read and write posts to your Mastodon account!
