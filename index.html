@@ -196,7 +196,7 @@ Re-posting only the saved posts that were bookmarked:<br />
 <div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-bookmarkedOnly:yes</span></b></code></div>
 <br/><br/>
 
-Re-posting saved posts with hashtags intact (hashtagged posts will appear in home timelines of hashtag followers and in hashtag searches):<br />
+Re-posting saved posts with hashtags intact (hashtagged posts will appear in home timelines of hashtag followers and in hashtag search results):<br />
 <div class="exampleCommand"><code>java -jar mcm.jar post -instance:<b>mstdn.social</b> -username:<b>gargronRelocated</b> -archiveName:<b>localBackup</b> <b><span style="color: red">-preserveHashtags:yes</span></b></code></div>
 <br/><br/>
 
@@ -263,7 +263,8 @@ MastodonContentMover respects Mastodon's <a href="https://docs.joinmastodon.org/
    <tr><td>Media uploads (per file)</td><td class="mid">60 seconds</td><td class="mid">120 seconds</td></tr>
 </table>
 <br />
-Users are also encouraged to set additional throttling, using the <code>-extraThrottle</code> parameter, to increase the number of seconds allowed between API calls.
+Users are also encouraged to set additional throttling, using the <code>-extraThrottle</code> parameter, to increase the number of seconds allowed between API calls.<br /><br />
+By default, archived posts that have "public" visibility are re-posted with "unlisted" visibility, to prevent flooding of local and federated timelines.
 
 <hr />
 <h2><a name="more">Further information</a></h2>
