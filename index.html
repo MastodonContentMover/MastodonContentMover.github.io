@@ -31,9 +31,9 @@
 
 <hr />
 <h4>What's new?</h4>
-<b>Development release v0.01.03</b>: Adding ability to identify and manage reposting to instances with a shorter post character limit, option to suppress public posts, calculation of estimated duration for saving and reposting, and other minor enhancements (<a href="versions.html">version history</a>)
+<b>Development release v0.01.04</b>: Adding extra throttling when overriding default settings to repost statuses to public timelines, in response to feedback from instance administrators, and updating to latest Bigbone library snapshot. (<a href="versions.html">version history</a>)
 <br /><br />
-<i>Last update Friday June 9, 2023</i>
+<i>Last update Tuesday July 25, 2023</i>
 <hr />
 
 <h2><a name="whatisMCM">What is MastodonContentMover?</a></h2>
@@ -148,11 +148,11 @@ Additional, optional command-line options that are currently implemented are as 
 <table>
    <tr>
       <td><code><b>-bookmarkedOnly</b><code></td>
-      <td><code>no</code> by default, <code>yes</code> to save or post only posts that were bookmarked by the specified user account</td>
+      <td><code>no</code> by default, <code>yes</code> to save or post only statuses that were bookmarked by the specified user account</td>
    </tr>
    <tr>
       <td><code><b>-preserveHashtags</b><code></td>
-      <td><code>no</code> by default, <code>yes</code> to retain hashtags when reposting statuses, which will result in the new, reposted posts being displayed under that hashtag to anyone who follows it or searches for it</td>
+      <td><code>no</code> by default, <code>yes</code> to retain hashtags when reposting statuses, which will result in the new, reposted statuses being displayed under that hashtag to anyone who follows it or searches for it providing the statuses have "public" visibility(see also: <code>-suppressPublic</code>)</td>
    </tr>
    <tr>
       <td><code><b>-extraThrottle</b><code></td>
@@ -261,11 +261,24 @@ MastodonContentMover respects Mastodon's <a href="https://docs.joinmastodon.org/
    <tr><th>Purpose</th><th>Mastodon default minimum interval between calls</th><th>MastodonContentMover interval</th></tr>
    <tr><td>General</td><td class="mid">1 second</td><td class="mid">5 seconds</td></tr>
    <tr><td>Media uploads (per file)</td><td class="mid">60 seconds</td><td class="mid">120 seconds</td></tr>
+   <tr><td>New posts (non-public)</td><td class="mid">1 second</td><td class="mid">5 seconds</td></tr>
+   <tr><td>New posts (public)</td><td class="mid">1 second</td><td class="mid">20 seconds</td></tr>
 </table>
 <br />
 Users are also encouraged to set additional throttling, using the <code>-extraThrottle</code> parameter, to increase the number of seconds allowed between API calls.<br /><br />
 By default, archived posts that have "public" visibility are re-posted with "unlisted" visibility, to prevent flooding of local and federated timelines.
-
+<br /><br />
+Here are some examples of the default throttle delays when reposting different types of statuses:<br /><br />
+<table>
+   <tr><th>Status</th><th>MastodonContentMover interval</th></tr>
+   <tr><td>a status with unlimited visibility and no attached media</td><td class="mid">5 seconds</td></tr>
+   <tr><td>a status with unlimited visibility and one attached video</td><td class="mid">125 seconds (a 120-second media upload delay plus a 5-second non-public new post delay)</td></tr>
+   <tr><td>a status with public visibility in the archive but unlisted visibility when reposted (because public posts are suppressed by default), and no attached media</td><td class="mid">5 seconds</td></tr>
+   <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and no attached media</td><td class="mid">20 seconds</td></tr>
+   <tr><td>a status with public visibility in the archive but unlisted visibility when reposted (because public posts are suppressed by default), and four attached images</td><td class="mid">485 seconds (four 120-second media upload delays plus a 5-second non-public new post delay)</td></tr>
+   <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and four attached images</td><td class="mid">500 seconds (four 120-second media upload delays plus a 20-second non-public new post delay)</td></tr>
+</table>
+<br />
 <hr />
 <h2><a name="more">Further information</a></h2>
 For now, any enquiries regarding this tool can be directed to <a rel="me" href="https://mas.to/@tokyo_0">Tokyo Outsider</a> via Mastodon. Soon details will be made available on how to submit a problem report via Github, to report suspected bugs or difficulties with use. In the meantime, please make a note of any difficulties you encounter (ideally with a copy of the command you entered and the command line output, with <code>-showDebug</code> set to <code>yes</code>).
