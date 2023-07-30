@@ -9,7 +9,17 @@
 <h1>Version history</h1>
 <a href="..">back to the main page</a><br /><br />
 <hr />
-<b>Development release v0.01.04 <span style="color: red">(latest)</span></b> - <i>Tuesday July 25, 2023</i><br /><br />
+<b>Development release v0.01.05 <span style="color: red">(latest)</span></b> - <i>Sunday July 30, 2023</i><br /><br />
+Applies a fix to prevent corruption of the archive if duplicate Mastodon instance ids are returned for reposted statuses, due to changes to the BigBone library, and increases the value of the extra throttle used when overriding default settings to repost statuses to public timelines (which was added in release v0.01.04 in response to feedback from instance administrators).
+<ul>
+  <li>adding defensive coding to Post objects to identify an attempt to add a duplicate Mastodon instance ID</li>
+  <li>adjusting the extra throttle applied when overriding default settings to repost statuses to public timelines, which was added in release v0.01.04 in response to feedback from instance administrators, from 20 seconds to 30 seconds</li>
+  <li>rationalising Post code to remove redundant (duplicate) method</li>
+</ul>
+Please note, previous development release v0.01.04 was mistakenly committed to the Github repository on July 25 with the message "Development release v0.01.03", duplicating the message on the earlier commit of June 9. The version committed to Github on July 25 should have been named "Development release v0.01.04". Apologies for any confusion.
+<br /><br />
+<hr />
+<b>Development release v0.01.04</b> - <i>Tuesday July 25, 2023</i><br /><br />
 Adding extra throttling when overriding default settings to repost statuses to public timelines, in response to feedback from instance administrators, and updating to latest Bigbone library snapshot.
 <ul>
   <li>creating separate throttling-value constants for new public and nonpublic posts, and adjusting reposting code and repost-time estimation code to use the new values</li>

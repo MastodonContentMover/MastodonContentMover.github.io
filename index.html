@@ -31,9 +31,10 @@
 
 <hr />
 <h4>What's new?</h4>
-<b>Development release v0.01.04</b>: Adding extra throttling when overriding default settings to repost statuses to public timelines, in response to feedback from instance administrators, and updating to latest Bigbone library snapshot. (<a href="versions.html">version history</a>)
+<b>Development release v0.01.05</b>: 
+Applies a fix to prevent corruption of the archive if duplicate Mastodon instance ids are returned for reposted statuses, due to changes to the BigBone library, and increases the value of the extra throttle used when overriding default settings to repost statuses to public timelines (which was added in release v0.01.04 in response to feedback from instance administrators). (<a href="versions.html">version history</a>)
 <br /><br />
-<i>Last update Tuesday July 25, 2023</i>
+<i>Last update Sunday July 30, 2023</i>
 <hr />
 
 <h2><a name="whatisMCM">What is MastodonContentMover?</a></h2>
@@ -262,7 +263,7 @@ MastodonContentMover respects Mastodon's <a href="https://docs.joinmastodon.org/
    <tr><td>General</td><td class="mid">1 second</td><td class="mid">5 seconds</td></tr>
    <tr><td>Media uploads (per file)</td><td class="mid">60 seconds</td><td class="mid">120 seconds</td></tr>
    <tr><td>New posts (non-public)</td><td class="mid">1 second</td><td class="mid">5 seconds</td></tr>
-   <tr><td>New posts (public)</td><td class="mid">1 second</td><td class="mid">20 seconds</td></tr>
+   <tr><td>New posts (public)</td><td class="mid">1 second</td><td class="mid">30 seconds</td></tr>
 </table>
 <br />
 Users are also encouraged to set additional throttling, using the <code>-extraThrottle</code> parameter, to increase the number of seconds allowed between API calls.<br /><br />
@@ -274,9 +275,9 @@ Here are some examples of the default throttle delays when reposting different t
    <tr><td>a status with unlimited visibility and no attached media</td><td class="mid">5 seconds</td></tr>
    <tr><td>a status with unlimited visibility and one attached video</td><td class="mid">125 seconds (a 120-second media upload delay plus a 5-second non-public new post delay)</td></tr>
    <tr><td>a status with public visibility in the archive but unlisted visibility when reposted (because public posts are suppressed by default), and no attached media</td><td class="mid">5 seconds</td></tr>
-   <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and no attached media</td><td class="mid">20 seconds</td></tr>
+   <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and no attached media</td><td class="mid">30 seconds</td></tr>
    <tr><td>a status with public visibility in the archive but unlisted visibility when reposted (because public posts are suppressed by default), and four attached images</td><td class="mid">485 seconds (four 120-second media upload delays plus a 5-second non-public new post delay)</td></tr>
-   <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and four attached images</td><td class="mid">500 seconds (four 120-second media upload delays plus a 20-second non-public new post delay)</td></tr>
+   <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and four attached images</td><td class="mid">510 seconds (four 120-second media upload delays plus a 30-second public new post delay)</td></tr>
 </table>
 <br />
 <hr />
