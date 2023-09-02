@@ -9,7 +9,16 @@
 <h1>Version history</h1>
 <a href="..">back to the main page</a><br /><br />
 <hr />
-<b>Development release v0.01.05 <span style="color: red">(latest)</span></b> - <i>Sunday July 30, 2023</i><br /><br />
+<b>Development release v0.01.06 <span style="color: red">(latest)</span></b> - <i>Saturday September 2, 2023</i><br /><br />
+Adds parameter to allow disabling of idempotency key for testing purposes, applies latest Bigbone library snapshot (required for previous) and increases the value of the extra throttle used when overriding default settings to repost statuses to public timelines.
+<ul>
+  <li>adding <code>testMode</code> parameter to disable idempotency key when testing</li>
+  <li>switching from Bigbone library snapshot version 2.0.0-20230719.193107-19 to bigbone-2.0.0-20230818.202222-21</li>
+  <li>adjusting the extra throttle applied when overriding default settings to repost statuses to public timelines, which was added in release v0.01.04 in response to feedback from instance administrators, from 30 seconds to 60 seconds</li>
+</ul>
+<br />
+<hr />
+<b>Development release v0.01.05</b> - <i>Sunday July 30, 2023</i><br /><br />
 Applies a fix to prevent corruption of the archive if duplicate Mastodon instance ids are returned for reposted statuses, due to changes to the BigBone library, and increases the value of the extra throttle used when overriding default settings to repost statuses to public timelines (which was added in release v0.01.04 in response to feedback from instance administrators).
 <ul>
   <li>adding defensive coding to Post objects to identify an attempt to add a duplicate Mastodon instance ID</li>
@@ -25,7 +34,7 @@ Adding extra throttling when overriding default settings to repost statuses to p
   <li>creating separate throttling-value constants for new public and nonpublic posts, and adjusting reposting code and repost-time estimation code to use the new values</li>
   <li>switching from Bigbone library snapshot version 2.0.0-20230606.210428-18 to 2.0.0-20230719.193107-19</li>
 </ul>
-<br /><br />
+<br />
 <hr />
 <b>Development release v0.01.03</b> - <i>Friday June 9, 2023</i><br /><br />
 Adding ability to identify and manage reposting to instances with a shorter post character limit, option to suppress public posts, calculation of estimated duration for saving and reposting, and other minor enhancements
@@ -38,14 +47,14 @@ Adding ability to identify and manage reposting to instances with a shorter post
   <li>upgrading to BigBone snapshot 18</li>
   <li>adding calcuation and display of estimated duration for saving and reposting operations</li>
 </ul>
-<br /><br />
+<br />
 <hr />
 <b>Development release v0.01.02</b> - <i>Thursday May 25, 2023</i><br /><br />
 Emergency fix for failure to load image files when running from .jar file
 <ul>
   <li>Emergency fix for issue when re-posting statuses with media attachments while running tool from a .jar file</li>
 </ul>
-<br /><br />
+<br />
 
 <hr />
 <b>Development release v0.01.01</b> - <i>Wednesday May 24, 2023</i><br /><br />
@@ -54,7 +63,7 @@ Emergency fix for failure on boosts (which is not implemented yet, but it was tr
   <li>Emergency fix for failure on boosts (with no text in the post)</li>
   <li>Change to variable name in Mover.java ("instanceId" to "irtInstanceId") for clarity (unrelated to fix)</li>
 </ul>
-<br /><br />
+<br />
 
 <hr />
 <b>Development release v0.01.00</b> - <i>Sunday May 21, 2023</i><br /><br />
