@@ -276,8 +276,8 @@ By default, archived posts that have "public" visibility are re-posted with "unl
 Here are some examples of the default throttle delays when reposting different types of statuses:<br /><br />
 <table>
    <tr><th>Status</th><th>MastodonContentMover interval</th></tr>
-   <tr><td>a status with unlimited visibility and no attached media</td><td class="mid">5 seconds</td></tr>
-   <tr><td>a status with unlimited visibility and one attached video</td><td class="mid">125 seconds (a 120-second media upload delay plus a 5-second non-public new post delay)</td></tr>
+   <tr><td>a status with unlisted visibility and no attached media</td><td class="mid">5 seconds</td></tr>
+   <tr><td>a status with unlisted visibility and one attached video</td><td class="mid">125 seconds (a 120-second media upload delay plus a 5-second non-public new post delay)</td></tr>
    <tr><td>a status with public visibility in the archive but unlisted visibility when reposted (because public posts are suppressed by default), and no attached media</td><td class="mid">5 seconds</td></tr>
    <tr><td>a status with public visibility in the archive and public visibility when reposted because <code>-suppressPublic</code> was explicitly set to <code>no</code>, and no attached media</td><td class="mid">60 seconds</td></tr>
    <tr><td>a status with public visibility in the archive but unlisted visibility when reposted (because public posts are suppressed by default), and four attached images</td><td class="mid">485 seconds (four 120-second media upload delays plus a 5-second non-public new post delay)</td></tr>
